@@ -12,16 +12,56 @@ html {
 
 body {
   font-family: "Lato", sans-serif;
-  background-color: mintcream;
+  background-color: #f6f6f6;
+}
+
+.parallax {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -4;
+}
+
+.opacity {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  background-color: rgba(0, 0, 0, 0.35);
+  -webkit-box-shadow: inset 0px 0px 55px 40px rgba(0, 0, 0, 1);
+  -moz-box-shadow: inset 0px 0px 55px 40px rgba(0, 0, 0, 1);
+  box-shadow: inset 0px 0px 55px 40px rgba(0, 0, 0, 1);
 }
 
 header {
+  position: relative;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: lightcyan;
-  border-bottom: 3px solid black;
+  background-color: teal;
+  color: #f6f6f6;
+  -webkit-text-stroke: 1px black;
+  border-bottom: 2px solid black;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.5) 0%,
+    rgba(255, 154, 0, 0.5) 10%,
+    rgba(208, 222, 33, 0.5) 20%,
+    rgba(79, 220, 74, 0.5) 30%,
+    rgba(63, 218, 216, 0.5) 40%,
+    rgba(47, 201, 226, 0.5) 50%,
+    rgba(28, 127, 238, 0.5) 60%,
+    rgba(95, 21, 242, 0.5) 70%,
+    rgba(186, 12, 248, 0.5) 80%,
+    rgba(251, 7, 217, 0.5) 90%,
+    rgba(255, 0, 0, 0.5) 100%
+  );
 }
 
 #top-page {
@@ -30,10 +70,15 @@ header {
   visibility: hidden;
 }
 
+#bottom-page {
+  position: absolute;
+  visibility: hidden;
+}
+
 /* MAIN TITLE */
 
 .main-title {
-  font-size: 3rem;
+  font-size: 5vw;
   letter-spacing: 18px;
 }
 
@@ -48,68 +93,74 @@ header {
   width: 80%;
 }
 
-.form label {
+.form h4 {
   font-size: 2rem;
+  font-weight: normal;
   margin-bottom: 20px;
+  color: #ffffff;
 }
 
 .form .input-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
 .form .input-container input {
   width: 50%;
   font-size: 2rem;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-radius: 10px;
   padding: 10px;
-  border-right: none;
   background-color: #ffffff;
+  border: 3px solid black;
+  opacity: 0.7;
 }
 
 .form .input-container input:focus {
   outline: none;
+  background-color: #ffffff;
+  border: 3px solid teal;
+  opacity: 1;
+}
+
+.form .input-container input:hover {
+  border-color: teal;
+}
+
+.form .input-container input::placeholder {
+  opacity: 0.4;
+}
+
+.form .input-container label {
+  font-size: 2rem;
+  margin-right: 10px;
+  color: #ffffff;
 }
 
 /* BUTTONS */
-
-.btn-submit {
-  cursor: pointer;
-  width: 80px;
-  border-color: black;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-  font-family: inherit;
-  font-size: 1.5rem;
-  background-color: crimson;
-  color: #f6f6f6;
-}
-
-.btn-submit:focus {
-  transform: scale(0.98);
-}
-
-.btn-submit:hover {
-  background-color: darkred;
-}
 
 .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  width: 80%;
 }
 
 .buttons button {
-  padding: 10px 20px;
+  padding: 10px 12px;
   border-radius: 10px;
   font-family: inherit;
   cursor: pointer;
   width: 180px;
   margin-left: 10px;
   background-color: lemonchiffon;
+  font-weight: bold;
+}
+
+.buttons button:hover {
+  background-color: khaki;
 }
 
 .buttons button i {
@@ -119,9 +170,11 @@ header {
 
 a.go-to-top {
   position: fixed;
-  bottom: 5px;
+  right: 5px;
+  bottom: 65px;
   opacity: 0.6;
-  width: 150px;
+  width: 40px;
+  height: 60px;
   padding: 10px 20px;
   margin: 10px 0;
   font-family: inherit;
@@ -145,6 +198,38 @@ a.go-to-top:hover {
 button.go-to-top:focus {
   outline: none;
 }
+
+a.go-to-bottom {
+  position: fixed;
+  right: 5px;
+  bottom: 0px;
+  opacity: 0.6;
+  width: 40px;
+  height: 60px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: lightcoral;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+a.go-to-bottom:hover {
+  opacity: 1;
+  background-color: crimson;
+  color: #f6f6f6;
+}
+
+button.go-to-bottom:focus {
+  outline: none;
+}
+
 /* MAIN */
 
 main {
@@ -164,17 +249,24 @@ main {
 }
 
 .main-container .box {
-  width: 300px;
+  width: 292px;
   height: 400px;
   margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid black;
+  border: 4px solid black;
   border-radius: 10px;
   background-color: #f6f6f6;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
+  transition: transform 0.2s ease;
+  -webkit-box-shadow: 0px 0px 55px -2px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 55px -2px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 55px -2px rgba(0, 0, 0, 1);
+}
+
+.main-container .box:hover {
+  transform: scale(1.07);
 }
 
 .flag-container {
@@ -217,4 +309,70 @@ main {
 
 .country-stats i {
   margin-right: 6px;
+}
+
+@media (max-width: 800px) {
+  header {
+    height: 120px;
+    padding: 0;
+  }
+  .main-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    letter-spacing: 11px;
+  }
+  .buttons {
+    width: 100%;
+  }
+  .form .input-container input {
+    width: 80%;
+    font-size: 2rem;
+  }
+  .opacity {
+    -webkit-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+  }
+}
+
+@media (max-width: 500px) {
+  .main-title {
+    font-size: 2rem;
+    letter-spacing: 6px;
+  }
+  .buttons {
+    width: 95%;
+  }
+  .buttons button {
+    height: 70px;
+  }
+  .form .input-container input {
+    width: 90%;
+    font-size: 2rem;
+  }
+  .opacity {
+    -webkit-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+  }
+}
+
+@media (max-width: 400px) {
+  header {
+    height: 120px;
+  }
+  .main-title {
+    font-size: 2rem;
+    letter-spacing: 4px;
+  }
+  .buttons {
+    width: 95%;
+  }
+  .opacity {
+    -webkit-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+  }
 }

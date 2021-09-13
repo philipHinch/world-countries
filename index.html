@@ -12,14 +12,16 @@
 <body>
     <span id="top-page"></span>
     <header>
+        <div class="parallax"><img src="/images/world.png" alt="parallax"></div>
+        <div class="opacity"></div>
         <h1 class="main-title" id="main-title"><i class="fas fa-globe-europe"></i> World Countries <i class="fas fa-globe-americas"></i></h1>
     </header>
     <main>
         <form class="form">
-            <label for="input">Search Country</label>
+            <h4 class="search-country-text">Search Country:</h4>
             <div class="input-container">
-                <input type="text" id="input">
-                <button class="btn-submit" type="submit">Go <i class="fas fa-chevron-right"></i></button>
+                <label for="search-input"><i class="fas fa-arrow-right"></i></label>
+                <input type="text" id="search-input" placeholder="Italy, Finland, Poland...">
             </div>
         </form>
         <section class="buttons">
@@ -31,8 +33,10 @@
         <section class="main-container">
                     
         </section>
-        <a href="#top-page"class="go-to-top">Go To Top</a>
+        <a href="#top-page"class="go-to-top" title="Go To Top"><i class="fas fa-arrow-alt-circle-up"></i></a>
+        <a href="#bottom-page"class="go-to-bottom" title="Go To Bottom"><i class="fas fa-arrow-alt-circle-down"></i></a>
     </main>
+    <span id="bottom-page"></span>
     <script src="/app.js"></script>
 </body>
 </html>

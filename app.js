@@ -8,16 +8,26 @@ const mostPopBtn = document.querySelector('.most-populated');
 const sortAZBtn = document.querySelector('.sort-az');
 const sortZABtn = document.querySelector('.sort-za');
 const largestAreaBtn = document.querySelector('.largest-area');
-const input = document.getElementById('input');
+const searchInput = document.getElementById('search-input');
+const countryNames = document.querySelectorAll('.country-name');
+
+
 
 let countriesArr = [];
+
+//FUNCTIONS
 
 // GET DATA FROM API
 async function getCountriesData() {
     const response = await fetch(countriesURL);
     const data = await response.json();
-    showCountries(data);
 
+    //replace "Å" with "A"
+    let string = data[1].name
+    let newString = string.replace(/Å/g, "A");
+    data[1].name = newString;
+
+    showCountries(data);
 }
 
 //SHOW COUNTRIES 
@@ -80,15 +90,20 @@ function formatNumbers(number) {
     }
 }
 
-//EVENT LISTENERS
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let inputValue = input.value.trim();
-    let inputValue2 = inputValue.charAt(0).toUpperCase() + inputValue.slice(1).toLowerCase();
-    console.log(inputValue2);
-    input.value = '';
-})
+//get filtered countries
+async function getFilteredCountries(countryName) {
+    const response = await fetch(`https://restcountries.eu/rest/v2/name/${ countryName }?fullText=true
+    `);
+    const data = await response.json();
 
+    return {
+        name: data
+    }
+}
+
+//EVENT LISTENERS
+
+//most populated countries button 
 mostPopBtn.addEventListener('click', () => {
     mainContainer.innerHTML = '';
     let mostPopCountries = sortCountries(countriesArr, 'population');
@@ -99,6 +114,7 @@ mostPopBtn.addEventListener('click', () => {
     showCountries(filtered)
 })
 
+//sort countries from a to z
 sortAZBtn.addEventListener('click', () => {
     mainContainer.innerHTML = '';
     let sortedCountriesAZ = sortCountries(countriesArr, 'name');
@@ -109,6 +125,7 @@ sortAZBtn.addEventListener('click', () => {
     showCountries(filtered)
 })
 
+//sort countries from z to a
 sortZABtn.addEventListener('click', () => {
     mainContainer.innerHTML = '';
     let sortedCountriesAZ = sortCountries(countriesArr, 'name');
@@ -119,6 +136,7 @@ sortZABtn.addEventListener('click', () => {
     showCountries(filtered)
 })
 
+//largest area countries button 
 largestAreaBtn.addEventListener('click', () => {
     mainContainer.innerHTML = '';
     let sortedCountriesAZ = sortCountries(countriesArr, 'area');
@@ -129,12 +147,21 @@ largestAreaBtn.addEventListener('click', () => {
     showCountries(filtered)
 })
 
+//search country 
+searchInput.addEventListener('keyup', (e) => {
+    const userText = e.target.value.toLowerCase();
+    const countryNames = document.querySelectorAll('.country-name');
+    countryNames.forEach((countryName) => {
+        if (countryName.innerText.toLowerCase().indexOf(userText) != -1) {
+            countryName.parentElement.parentElement.style.display = 'flex';
+        } else {
+            countryName.parentElement.parentElement.style.display = 'none';
+        }
+    })
+});
 
 getCountriesData()
 
 
-// REPLACE THE Å IN ALAND ISLAND TO ENGLISH ALPHABET A
-
-// FINISH THE TEXT INPUT SEARCH
 
 
