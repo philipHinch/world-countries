@@ -352,6 +352,9 @@ main {
     width: 90%;
     font-size: 2rem;
   }
+  .form .input-container input::placeholder {
+    font-size: 1.4rem;
+  }
   .opacity {
     -webkit-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
     -moz-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
@@ -371,8 +374,8 @@ main {
     width: 95%;
   }
   .opacity {
-    -webkit-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
-    -moz-box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
-    box-shadow: inset 0px 0px 55px 22px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: inset 0px 0px 50px 3px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 50px 3px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 50px 3px rgba(0, 0, 0, 1);
   }
 }
