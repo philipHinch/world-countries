@@ -1,6 +1,4 @@
-// random facts: https://uselessfacts.jsph.pl/random.json?language=en
 
-const countriesURL = 'https://restcountries.eu/rest/v2/all';
 
 let mainContainer = document.querySelector('.main-container');
 const form = document.querySelector('.form');
@@ -19,15 +17,23 @@ let countriesArr = [];
 
 // GET DATA FROM API
 async function getCountriesData() {
-    const response = await fetch(countriesURL);
-    const data = await response.json();
+    try {
+        let apiKey = 'a84c1f7c00f9712365e88084d26b5648';
+        let url = 'http://api.countrylayer.com/v2/all?access_key=';
+        const response = await fetch(url += apiKey);
+        const data = await response.json();
 
-    //replace "Å" with "A"
-    let string = data[1].name
-    let newString = string.replace(/Å/g, "A");
-    data[1].name = newString;
+        //replace "Å" with "A"
+        let string = data[1].name
+        let newString = string.replace(/Å/g, "A");
+        data[1].name = newString;
 
-    showCountries(data);
+        console.log(data);
+        showCountries(data);
+    } catch (err) {
+        console.log('There has been an error!', err);
+    }
+
 }
 
 //SHOW COUNTRIES 
