@@ -20,7 +20,8 @@ async function getCountriesData() {
     try {
         let apiKey = 'a84c1f7c00f9712365e88084d26b5648';
         let url = 'http://api.countrylayer.com/v2/all?access_key=';
-        const response = await fetch(url += apiKey);
+        let newURL = 'https://restcountries.com/v2/all';
+        const response = await fetch(newURL);
         const data = await response.json();
 
         //replace "Å" with "A"
